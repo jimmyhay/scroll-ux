@@ -16,7 +16,7 @@ var inertia = 0;
 var spring = 0.8;
 
 // document.querySelector('body').addEventListener('onscroll', onScroll, false);
-console.log(document.getElementsByTagName('body'));
+// console.log(document.getElementsByTagName('body'));
 window.addEventListener("wheel", scroll);
 
 window.requestAnimationFrame(step);
@@ -47,7 +47,7 @@ function scroll(e) {
       scrollPage(currentLink+1);
 
       window.setTimeout(function() {
-        canScroll = true;}, 1000);
+        canScroll = true;}, 700);
     } else if (inertia < -20) {
       canScroll = false;
 
@@ -56,33 +56,13 @@ function scroll(e) {
       scrollPage(currentLink-1);
 
       window.setTimeout(function() {
-        canScroll = true;}, 1000);
+        canScroll = true;}, 700);
     }
   }
-
-  // if (e.deltaY > 0) {
-  //   direction = 1;
-  // } else {
-  //   direction = -1;
-  // }
-
-  // if (scrolling) return;
-  //
-  // scrolling = true;
-
-  // window.setTimeout(function() {
-  //   scrolling = false;
-  //   scrollPage(currentLink+direction)}, 500);
-
-  // if (scrollCounter < 0) scrollCounter = 0;
-  // if (scrollCounter < 30) scrollPage(0);
-  // if (scrollCounter > 30) scrollPage(1);
-
-  // console.log(scrollCounter);
 }
 
 function scrollPage(page) {
-  console.log("scrollPage");
+  // console.log("scrollPage");
   simulatedClick(dots[page]);
 }
 

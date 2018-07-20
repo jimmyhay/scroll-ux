@@ -26,12 +26,24 @@ body {
   background-color: pink;
 }
 
+#page-2 span {
+  color: #f74e5e;
+}
+
 #page-3 {
   background-color: green;
 }
 
+#page-3 span {
+  color: #89df8d;
+}
+
 #page-4 {
   background-color: purple;
+}
+
+#page-4 span {
+  color: #b689df;
 }
 
 .page {
