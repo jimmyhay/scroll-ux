@@ -11,7 +11,20 @@
           <span>1</span>
         </div>
         <div id='page-2' class='page'>
-          <span>2</span>
+          <div id='page-2-container'>
+            <div class='page page-2-page'>
+              <span>2-1</span>
+            </div>
+            <div class='page page-2-page'>
+              <span>2-2</span>
+            </div>
+          </div>
+          <div id='page-2-page-links' class='image-links'>
+            <ul>
+              <li class='image-link'><div class='image-link-dot'></li>
+              <li class='image-link'><div class='image-link-dot'></li>
+            </ul>
+          </div>
         </div>
         <div id='page-3' class='page'>
           <span>3</span>
@@ -21,17 +34,18 @@
         </div>
       </div>
     </div>
-    <div class='image-links image-links-vertical'>
+    <div id='verticalPageLinks' class='image-links image-links-vertical'>
       <ul>
-        <li class='image-link'><div class='image-link-dot'></li>
-        <li class='image-link'><div class='image-link-dot'></li>
-        <li class='image-link'><div class='image-link-dot'></li>
-        <li class='image-link'><div class='image-link-dot'></li>
+        <li class='image-link image-link-vertical'><div class='image-link-dot'></li>
+        <li class='image-link image-link-vertical'><div class='image-link-dot'></li>
+        <li class='image-link image-link-vertical'><div class='image-link-dot'></li>
+        <li class='image-link image-link-vertical'><div class='image-link-dot'></li>
       </ul>
     </div>
   </body>
   <script src="js/hammer.min.js"></script>
   <script src="js/simulatedClick.js"></script>
+  <script src="js/scrollIndex.js"></script>
   <script src="js/index.js"></script>
   <script
 </html>
