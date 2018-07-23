@@ -17,7 +17,29 @@ var spring = 0.8;
 
 // document.querySelector('body').addEventListener('onscroll', onScroll, false);
 // console.log(document.getElementsByTagName('body'));
-window.addEventListener("wheel", scroll);
+window.addEventListener('wheel', scroll);
+window.ontouchmove = function(e){ e.preventDefault(); }
+// body.addEventListener('touchstart', touchStart, false);
+// body.addEventListener('touchmove', touchMove, false);
+// body.addEventListener('touchend', touchEnd, false);
+
+var hammertime = new Hammer(body);
+
+hammertime.get('swipe').set({
+  direction: Hammer.DIRECTION_ALL,
+  threshold: 1,
+  velocity:0.1
+});
+
+hammertime.on('swipedown', function(ev) {
+	console.log(ev);
+  scrollPage(currentLink-1);
+});
+
+hammertime.on('swipeup', function(ev) {
+	console.log(ev);
+  scrollPage(currentLink+1);
+});
 
 window.requestAnimationFrame(step);
 
@@ -25,6 +47,18 @@ function step() {
   inertia *= spring;
 
   window.requestAnimationFrame(step);
+}
+
+function touchStart(e) {
+}
+
+function touchMove(e) {
+  // e.preventDefault();
+
+  scrollPage(currentLink+1);
+}
+
+function touchEnd(e) {
 }
 
 function scroll(e) {
