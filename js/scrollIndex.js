@@ -37,8 +37,8 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
 
   this.init = function() {
     window.addEventListener('wheel', this.scroll.bind(this));
-    // window.ontouchmove = function(e){ e.preventDefault(); }
-    //
+    window.ontouchmove = function(e){ e.preventDefault(); }
+    
     window.requestAnimationFrame(this.step.bind(this));
 
     for (var i = 0; i < this.links.length; i++) {
@@ -119,6 +119,7 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   }
 
   this.scrollPage = function(page) {
+    console.log('scrollPage', page);
     simulatedClick(this.dots[page]);
   }
 
@@ -132,7 +133,6 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   }
 
   this.resetLinks = function() {
-    console.log(this.links.length);
     for (var i=0; i < this.links.length; i++) {
       this.dots[i].classList.remove('image-link-active');
     }
@@ -152,7 +152,11 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   }
 
   this.resize = function() {
-    this.containerDiv.style.transform = 'translate3d(0,'+ -this.currentPage.offsetTop +'px, 0)';
+    if (this.direction == VERTICAL) {
+      this.containerDiv.style.transform = 'translate3d(0,'+ -this.currentPage.offsetTop +'px, 0)';
+    } else {
+      this.containerDiv.style.transform = 'translate3d('+ -this.currentPage.offsetLeft +'px, 0, 0)';
+    }
   }
 
   this.init();

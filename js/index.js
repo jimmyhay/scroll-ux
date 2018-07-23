@@ -2,6 +2,8 @@
 // var dots = document.querySelectorAll('.image-link-dot');
 // var body = document.querySelector('body');
 var wrapper = document.querySelector('#pages-container');
+var page2Wrapper = document.querySelector('#page-2-container');
+var page4Wrapper = document.querySelector('#page-4-container');
 // var pages = document.querySelectorAll('.page');
 
 console.log("LOADED");
@@ -19,15 +21,16 @@ console.log("LOADED");
 // window.ontouchmove = function(e){ e.preventDefault(); }
 
 // var hammertime = new Hammer(body);
-var verticalScrollIndex = new ScrollIndex(document.querySelector('#pages-container'), wrapper.children, document.querySelector('#verticalPageLinks'), 'vertical', true);
-var horizontalScrollIndex = new ScrollIndex(document.querySelector('#page-2-container'), document.querySelectorAll('#page-2-container > .page-2-page'), document.querySelector('#page-2-page-links'), 'horizontal');
+page2Wrapper.style.width = (page2Wrapper.getElementsByClassName('page').length * 100) + 'vw';
+page4Wrapper.style.width = (page4Wrapper.getElementsByClassName('page').length * 100) + 'vw';
 
-console.log(horizontalScrollIndex.links);
-console.log(verticalScrollIndex.links);
+var verticalScrollIndex = new ScrollIndex(wrapper, wrapper.children, document.querySelector('#verticalPageLinks'), 'vertical', true);
+var page2Scroll = new ScrollIndex(page2Wrapper, document.querySelectorAll('#page-2-container > .page'), document.querySelector('#page-2-page-links'), 'horizontal');
+var page4Scroll = new ScrollIndex(page4Wrapper, document.querySelectorAll('#page-4-container > .page'), document.querySelector('#page-4-page-links'), 'horizontal');
 
 window.onresize = function () {
   verticalScrollIndex.resize();
-  horizontalScrollIndex.resize();
+  page2Scroll.resize();
 };
 // console.log(verticalScrollIndex.dots);
 // console.log(horizontalScrollIndex);
