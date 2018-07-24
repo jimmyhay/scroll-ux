@@ -22,7 +22,7 @@ body {
 }
 
 #page-1 {
-  background-color: grey;
+  background-color: black;
 }
 
 #page-2 {
@@ -113,7 +113,7 @@ body {
   position: absolute;
   border-radius: 50%;
   width: 10px; height: 10px;
-  background-color: rgba(0,0,0, 0.5);
+  background-color: rgba(255,255,255, 0.6);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -122,7 +122,7 @@ body {
 
 .image-link-active {
   width: 12px; height: 12px;
-  background-color: rgba(0,0,0, 0.7);
+  background-color: rgba(255,255,255, 0.9);
 }
 
 #page-2-container,#page-4-container {

@@ -24,14 +24,26 @@ console.log("LOADED");
 page2Wrapper.style.width = (page2Wrapper.getElementsByClassName('page').length * 100) + 'vw';
 page4Wrapper.style.width = (page4Wrapper.getElementsByClassName('page').length * 100) + 'vw';
 
-var verticalScrollIndex = new ScrollIndex(wrapper, wrapper.children, document.querySelector('#verticalPageLinks'), 'vertical', true);
+var verticalScrollIndex = new ScrollIndex(wrapper, wrapper.children, document.querySelector('#verticalPageLinks'), 'vertical', true, pageChanged);
 var page2Scroll = new ScrollIndex(page2Wrapper, document.querySelectorAll('#page-2-container > .page'), document.querySelector('#page-2-page-links'), 'horizontal');
 var page4Scroll = new ScrollIndex(page4Wrapper, document.querySelectorAll('#page-4-container > .page'), document.querySelector('#page-4-page-links'), 'horizontal');
 
 window.onresize = function () {
   verticalScrollIndex.resize();
   page2Scroll.resize();
+  page4Scroll.resize();
 };
+
+function pageChanged(index) {
+  console.log('pageChanged', index);
+
+  page2Scroll.setActive(false);
+  page4Scroll.setActive(false);
+
+  if (index == 1) page2Scroll.setActive(true);
+  if (index == 3) page4Scroll.setActive(true);
+}
+
 // console.log(verticalScrollIndex.dots);
 // console.log(horizontalScrollIndex);
 // hammertime.get('swipe').set({

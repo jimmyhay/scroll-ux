@@ -1,9 +1,9 @@
 var VERTICAL = 'vertical';
 var HORIZONTAL = 'horizontal';
 
-function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active=false) {
+function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active=false, callback) {
   // console.log('ScrollIndex', container, scrollPages, scrollDots, scrollDirection);
-
+  console.log(scrollDots);
   this.body = document.querySelector('body');
 
   this.containerDiv;
@@ -18,10 +18,12 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   this.scrollCounter = 0;
 
   this.direction = 0;
-  this.active = true;
+  this.active = active;
   this.canScroll = true;
   this.inertia = 0;
   this.spring = 0.8;
+
+  this.callback = callback;
 
   this.hammertime = new Hammer(this.body);
 
@@ -38,7 +40,7 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   this.init = function() {
     window.addEventListener('wheel', this.scroll.bind(this));
     window.ontouchmove = function(e){ e.preventDefault(); }
-    
+
     window.requestAnimationFrame(this.step.bind(this));
 
     for (var i = 0; i < this.links.length; i++) {
@@ -50,6 +52,10 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
     }
 
     this.dots[0].classList.add('image-link-active');
+  }
+
+  this.setActive = function(bool) {
+    this.active = bool;
   }
 
   this.step = function() {
@@ -95,7 +101,7 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   }
 
   this.scrollDirection = function() {
-    if (this.inertia > 20) {
+    if (this.inertia > 20 && (this.currentLink+1 < this.pages.length)) {
       this.canScroll = false;
 
       this.inertia = 0;
@@ -103,7 +109,7 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
       this.scrollPage(this.currentLink+1);
 
       window.setTimeout(this.resetCanScroll.bind(this), 700);
-    } else if (this.inertia < -20) {
+    } else if (this.inertia < -20 && (this.currentLink-1 > -1)) {
       this.canScroll = false;
 
       this.inertia = 0;
@@ -119,7 +125,6 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
   }
 
   this.scrollPage = function(page) {
-    console.log('scrollPage', page);
     simulatedClick(this.dots[page]);
   }
 
@@ -129,6 +134,7 @@ function ScrollIndex(container, scrollPages, scrollDots, scrollDirection, active
     if (e.currentTarget.itemID != this.currentLink) {
       this.resetLinks();
       this.changePos(e);
+      if (this.callback) this.callback(e.currentTarget.itemID);
     }
   }
 
